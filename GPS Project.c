@@ -65,3 +65,16 @@ void LCD_init(void){
   LCD_command(0x01); //clear screen, move cursor to home 
   LCD_command(0x0F); // turn on display, cursor blinking *
 }
+
+void LCD_command(unsigned char command)
+{
+GPIO_PORTA_DATA_R = 0; /* RS = 0, R/W = 0 */
+GPIO_PORTB_DATA_R = command;
+GPIO_PORTA_DATA_R = 0x80; /* pulse E */
+delayUs(0);
+GPIO_PORTA_DATA_R = 0;
+if (command < 4)
+delayMs(2); /* command 1 and 2 needs up to 1.64ms */
+else
+delayUs(40); /* all others 40 us */
+}
