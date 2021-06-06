@@ -78,3 +78,12 @@ delayMs(2); /* command 1 and 2 needs up to 1.64ms */
 else
 delayUs(40); /* all others 40 us */
 }
+void LCD_data(unsigned char data)
+{
+GPIO_PORTA_DATA_R = 0x20; /* RS = 1, R/W = 0 */
+GPIO_PORTB_DATA_R = data;
+GPIO_PORTA_DATA_R = 0x80 | 0x20; /* pulse E */
+delayUs(0);
+GPIO_PORTA_DATA_R = 0;
+delayUs(40);
+}
