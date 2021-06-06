@@ -45,9 +45,23 @@ void LCD_init(void);
 
 
 int main(){
-			
-		
+	initPORTF();
+	LCD_init();
+	while(1){
+		Distance(X1,Y1,X2,Y2);
+	    	if(Z > 100){
+			GPIO_PORTF_DATA_R = GREEN;			
+			LCD_command(1); /* clear display */
+		        LCD_command(0x80); /* lcd cursor location */
+		        delayMs(500);
+		  	LCD_data('1');
+        		LCD_data('5');
+        		LCD_data('0');
+		  	delayMs(500);
+			}
+		}		
 	}
+
 void LCD_init(void){
   SYSCTL_RCGCGPIO_R |= 0x00000003;
 	GPIO_PORTA_DIR_R = 0xE0;     //set PORTA pin 7-5 as output
