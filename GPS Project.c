@@ -82,6 +82,147 @@ void initPORTF(void){
 	}
 
 >>>>>>> 72a0f3ac75df05c9bdb8527ef714f3e61dcc4604
+
+void getData(double *la,double *lo){
+		char n[10];
+		char e[10];
+		char nfinal[10];
+		char nfinaltry[10];
+		char efinal[10];
+		char efinaltry[10];
+		int i;
+		int k;
+		int j;
+    char b[30];
+		char *ptr3;
+		char *ptr;
+		char *ptrf;
+		char *ptr2;
+		double lon1;
+		double lat1;
+		
+		
+	
+		
+			
+	
+		
+	while(UART5_read()!='L'){
+	    UART5_read();
+	
+	}while(UART5_read()!='L'){
+	    UART5_read();
+	
+	}for(i=0;i<30;i++){
+		b[i]=UART5_read();
+	}
+		
+	
+	
+	
+	for(j=0;j<10;j++){
+		n[j]=b[j+1];
+	
+		
+	}
+	
+	for(k=0;k<10;k++){
+		e[k]=b[k+14];
+		
+	}
+	
+	nfinal[0]=n[0];
+	nfinal[1]=n[1];
+	
+	
+	
+	nfinaltry[0]=n[2];
+	nfinaltry[1]=n[3];
+	nfinaltry[2]=n[4];
+	nfinaltry[3]=n[5];
+	nfinaltry[4]=n[6];
+	nfinaltry[5]=n[7];
+	nfinaltry[6]=n[8];
+	nfinaltry[7]=n[9];
+	
+	
+	
+    
+    lat1 = strtod(nfinaltry, &ptr);
+    lat1 = lat1/60;
+    
+    sprintf(nfinaltry , "%lf" , lat1);
+    
+    nfinal[2]=nfinaltry[1];
+    nfinal[3]=nfinaltry[2];
+    nfinal[4]=nfinaltry[3];
+    nfinal[5]=nfinaltry[4];
+    nfinal[6]=nfinaltry[5];
+    nfinal[7]=nfinaltry[6];
+    nfinal[8]=nfinaltry[7];
+    
+    
+    
+    
+    *la = strtod(nfinal, &ptrf);
+    
+    
+    
+    
+    efinal[0]=e[0];
+    efinal[1]=e[1];
+    efinal[2]=e[2];
+    
+    
+    efinaltry[0]=e[3];
+    efinaltry[1]=e[4];
+    efinaltry[2]=e[5];
+    efinaltry[3]=e[6];
+    efinaltry[4]=e[7];
+    efinaltry[5]=e[8];
+    efinaltry[6]=e[9];
+    
+    
+	
+    
+    lon1 = strtod(efinaltry, &ptr2);
+    lon1 = lon1/60;
+    
+    
+    sprintf(efinaltry , "%lf" , lon1);
+    
+    efinal[3]=efinaltry[1];
+    efinal[4]=efinaltry[2];
+    efinal[5]=efinaltry[3];
+    efinal[6]=efinaltry[4];
+    efinal[7]=efinaltry[5];
+    efinal[8]=efinaltry[6];
+    
+    
+    
+    
+     *lo = strtod(efinal, &ptr3);
+	
+	 
+	
+	
+	  
+		
+	
+	
+	/*for(j=0;j<30;j++){
+		if(j==15){LCD_command(0xC0);LCD_data(b[15]);}else
+	  LCD_data(b[j]);
+	}*/
+		
+}
+
+
+
+
+
+
+
 int main(){
 	double calcDistance;
 	char distance1[10];
